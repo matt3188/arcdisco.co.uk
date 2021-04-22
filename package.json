@@ -1,0 +1,16 @@
+{
+  "name": "my-gridsome-project",
+  "private": true,
+  "scripts": {
+    "develop": "gridsome develop",
+    "explore": "gridsome explore",
+    "build": "gridsome build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+    },
+  "dependencies": {
+    "@gridsome/source-wordpress": "^0.5.0",
+    "gh-pages": "^3.1.0",
+    "gridsome": "^0.7.0"
+  }
+}
