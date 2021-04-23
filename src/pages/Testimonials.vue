@@ -1,6 +1,5 @@
 <template>
   <Layout>
-    <h1 class="mb-5">{{ $page.page.title }}</h1>
     <div class="page-content" v-html="$page.page.content" />
     <ul class="post-list">
       <li v-for="(node, i) in $page.page.acf.testimonial" :key="i">
@@ -13,7 +12,7 @@
 
 <page-query>
 query Testimonials {
-  page: wordPressPage(id:19) {
+  page: wordPressPage(path: "/pages/testimonials") {
     title
     content
     acf {
@@ -26,6 +25,7 @@ query Testimonials {
         testimonial
       }
     }
+
   }
 }
 </page-query>
