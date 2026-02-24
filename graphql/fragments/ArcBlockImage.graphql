@@ -1,0 +1,8 @@
+fragment ArcBlockImage on arc_block_image {
+  image {
+    _id: id
+    title
+    width
+    height
+  }
+}

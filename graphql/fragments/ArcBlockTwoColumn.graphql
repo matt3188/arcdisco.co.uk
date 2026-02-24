@@ -1,15 +1,25 @@
 fragment ArcBlockTwoColumn on arc_block_two_columns {
   left_col {
+    _id: id
+    collection
     item {
       ... on arc_block_content {
         ...ArcBlockContent
       }
+      ... on arc_block_image {
+        ...ArcBlockImage
+      }
     }
   }
   right_col {
+    _id: id
+    collection
     item {
       ... on arc_block_content {
         ...ArcBlockContent
+      }
+      ... on arc_block_image {
+        ...ArcBlockImage
       }
     }
   }

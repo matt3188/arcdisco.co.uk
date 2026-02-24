@@ -11,6 +11,9 @@ query GetArcPage($permalink: String!) {
         ... on arc_block_two_columns {
           ...ArcBlockTwoColumn
         }
+        ... on arc_block_image {
+          ...ArcBlockImage
+        }
       }
     }
   }
