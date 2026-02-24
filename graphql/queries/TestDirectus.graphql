@@ -1,6 +1,0 @@
-query TestDirectus {
-  test {
-    id
-    name
-  }
-}
