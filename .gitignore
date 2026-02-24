@@ -24,3 +24,4 @@ logs
 !.env.example
 
 graphql/schema.graphql
+graphql/generated/graphql.ts

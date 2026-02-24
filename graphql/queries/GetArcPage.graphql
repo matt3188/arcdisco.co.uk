@@ -1,0 +1,17 @@
+query GetArcPage($permalink: String!) {
+  arc_content(limit: 1, filter: { permalink: { _eq: $permalink } }) {
+    _id: id
+    blocks {
+      _id: id
+      collection
+      item {
+        ... on arc_block_content {
+          ...ArcBlockContent
+        }
+        ... on arc_block_two_columns {
+          ...ArcBlockTwoColumn
+        }
+      }
+    }
+  }
+}

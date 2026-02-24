@@ -1,0 +1,4 @@
+fragment ArcBlockContent on arc_block_content {
+  _id: id
+  body
+}

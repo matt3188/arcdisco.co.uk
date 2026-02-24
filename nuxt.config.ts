@@ -1,5 +1,6 @@
+import { resolve } from 'node:path'
 import tailwindcss from '@tailwindcss/vite'
-import graphql from '@rollup/plugin-graphql'
+import graphqlLoader from 'vite-plugin-graphql-loader'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -7,19 +8,30 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/ui',
     '@nuxt/image',
+    '@nuxtjs/mdc',
     '@nuxtjs/google-fonts',
     './modules/directus',
+  ],
+
+  components: [
+    { path: '~/components/' },
+    {
+      path: '~/components/prose',
+      global: true,
+      prefixPath: false,
+      prefix: 'Prose',
+    },
   ],
 
   devtools: {
     enabled: true,
   },
 
-  directus: {
-    directusUrl: process.env.NUXT_PUBLIC_DIRECTUS_URL,
-  },
-
   css: ['~/assets/css/main.css'],
+
+  mdc: {
+    components: { prose: true },
+  },
 
   runtimeConfig: {
     directus: {
@@ -33,6 +45,9 @@ export default defineNuxtConfig({
       },
     },
   },
+  alias: {
+    '~graphql': resolve(process.cwd(), 'graphql'),
+  },
 
   routeRules: {
     '/': { prerender: true },
@@ -40,8 +55,22 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2025-01-15',
 
+  nitro: {
+    alias: {
+      '~graphql': resolve(process.cwd(), 'graphql'),
+    },
+
+    rollupConfig: {
+      plugins: [graphqlLoader()],
+    },
+  },
+
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [graphqlLoader(), tailwindcss()],
+  },
+
+  directus: {
+    directusUrl: process.env.NUXT_PUBLIC_DIRECTUS_URL,
   },
 
   eslint: {
@@ -50,12 +79,6 @@ export default defineNuxtConfig({
         commaDangle: 'never',
         braceStyle: '1tbs',
       },
-    },
-  },
-
-  nitro: {
-    rollupConfig: {
-      plugins: [graphql()],
     },
   },
 })
