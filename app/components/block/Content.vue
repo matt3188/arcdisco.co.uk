@@ -5,7 +5,7 @@ defineProps<ArcBlockContent>()
 </script>
 
 <template>
-  <div class="prose dark:prose-invert">
+  <div class="prose dark:prose-invert py-4">
     <MDC :value="body" tag="article" />
   </div>
 </template>

@@ -3,7 +3,7 @@ defineProps<{ id: string }>()
 </script>
 
 <template>
-  <h3 :id="id" class="prose dark:prose-invert text-3xl">
+  <h3 :id="id" class="prose dark:prose-invert text-2xl">
     <slot />
   </h3>
 </template>

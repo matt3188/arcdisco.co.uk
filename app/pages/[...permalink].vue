@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import BaseBlock from '~/components/BaseBlock.vue'
-
 const route = useRoute()
 const permalink = route.params.permalink as string
 
@@ -20,7 +18,7 @@ const pageBlocks = computed(
 </script>
 
 <template>
-  <div>
+  <div class="container mx-auto px-4 py-8">
     <BaseBlock v-for="block in pageBlocks" :key="block.id" v-bind="block" />
   </div>
 </template>
