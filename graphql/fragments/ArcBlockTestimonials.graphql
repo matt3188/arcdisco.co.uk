@@ -1,0 +1,7 @@
+fragment ArcBlockTestimonials on arc_block_testimonials {
+  _id: id
+  body
+  citation
+  date
+  location
+}

@@ -1,0 +1,11 @@
+fragment ArcBlockNavigations on arc_block_navigations {
+  _id: id
+  blocks {
+    collection
+    item {
+      ... on arc_block_link {
+        ...ArcBlockLink
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+fragment ArcBlockLink on arc_block_link {
+  _id: id
+  link_type
+  content {
+    permalink
+  }
+  url
+  name
+}

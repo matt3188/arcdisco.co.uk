@@ -1,0 +1,5 @@
+query GetArcSite {
+  ... on arc_block_navigations {
+    ...ArcBlockNavigations
+  }
+}
