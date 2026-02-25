@@ -1,4 +1,8 @@
-<script setup>
+<script setup lang="ts">
+import type { NavigationMenuItem } from '@nuxt/ui'
+
+import { computed } from 'vue'
+
 useHead({
   meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
   link: [{ rel: 'icon', href: '/favicon.ico' }],
@@ -20,9 +24,28 @@ useSeoMeta({
   twitterImage: 'https://ui.nuxt.com/assets/templates/nuxt/starter-light.png',
   twitterCard: 'summary_large_image',
 })
+
+const { data: site, error } = await useFetch('/api/site', {
+  key: 'site',
+  default: () => null,
+})
+
+function toMenuItem(block: any) {
+  const { item } = block
+  const href =
+    item.link_type === 'internal' ? item.content?.permalink : item.url
+  return { label: item.name, to: href }
+}
+
+const menuItems = computed(() => {
+  const s = site.value as any
+  return s?.arc_block_navigations?.[0]?.blocks?.map(toMenuItem) ?? []
+})
+const items = ref<NavigationMenuItem[]>(menuItems.value)
 </script>
 
 <template>
+  <!-- will now log the array -->
   <UApp>
     <UHeader>
       <template #left>
@@ -30,6 +53,12 @@ useSeoMeta({
           <AppLogo class="w-auto h-6 shrink-0" />
         </NuxtLink>
       </template>
+
+      <UNavigationMenu
+        orientation="horizontal"
+        :items="items"
+        class="data-[orientation=vertical]:w-48"
+      />
 
       <template #right>
         <UColorModeButton />

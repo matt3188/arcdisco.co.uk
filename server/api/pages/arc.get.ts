@@ -2,14 +2,21 @@ import { GetArcPageDocument } from '~graphql/generated/graphql'
 import type { GetArcPageQuery } from '~graphql/generated/graphql'
 import { print } from 'graphql'
 
-function normalizePermalink(input: unknown): string {
+function normalisePermalink(input: unknown): string {
+  // only ensure a leading slash; remove trailing slash if present
+  const ensureLeading = (s: string) => {
+    if (!s.startsWith('/')) s = '/' + s
+    return s.replace(/\/+$/, '')
+  }
+
   if (Array.isArray(input)) {
     const joined = input.filter(Boolean).join('/')
-    return joined ? `/${joined}` : '/'
+    return joined ? ensureLeading(joined) : '/'
   }
   if (typeof input === 'string') {
     const trimmed = input.trim()
-    return trimmed === '' ? '/' : trimmed
+    if (trimmed === '') return '/'
+    return ensureLeading(trimmed)
   }
   return '/'
 }
@@ -22,7 +29,7 @@ const GetArcPageQueryString = print(GetArcPageDocument)
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
-  const permalink = normalizePermalink(query.permalink)
+  const permalink = normalisePermalink(query.permalink)
 
   if (looksLikeAssetPath(permalink)) {
     // Return a real value to avoid client-side duplication warnings
