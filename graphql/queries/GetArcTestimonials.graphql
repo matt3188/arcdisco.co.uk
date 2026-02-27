@@ -1,0 +1,5 @@
+query GetArcTestimonials {
+  arc_block_testimonials {
+    ...ArcBlockTestimonials
+  }
+}

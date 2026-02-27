@@ -14,9 +14,6 @@ query GetArcPage($permalink: String!) {
         ... on arc_block_image {
           ...ArcBlockImage
         }
-        ... on arc_block_testimonials {
-          ...ArcBlockTestimonials
-        }
       }
     }
   }
